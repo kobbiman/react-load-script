@@ -9,6 +9,7 @@ export default class Script extends React.Component {
     onError: RPT.func.isRequired,
     onLoad: RPT.func.isRequired,
     url: RPT.string.isRequired,
+    containerId: RPT.string,
   };
 
   static defaultProps = {
@@ -16,6 +17,7 @@ export default class Script extends React.Component {
     onCreate: () => {},
     onError: () => {},
     onLoad: () => {},
+    containerId: '',
   }
 
   // A dictionary mapping script URLs to a dictionary mapping
@@ -78,7 +80,7 @@ export default class Script extends React.Component {
   }
 
   createScript() {
-    const { onCreate, url, attributes } = this.props;
+    const { onCreate, url, attributes, containerId } = this.props;
     const script = document.createElement('script');
 
     onCreate();
@@ -118,8 +120,12 @@ export default class Script extends React.Component {
         return true;
       });
     };
-
-    document.body.appendChild(script);
+    console.log('containerId :: ', containerId);
+    if (containerId) {
+      document.getElementById(containerId).appendChild(script);
+    } else {
+      document.body.appendChild(script);
+    }
   }
 
   render() {
