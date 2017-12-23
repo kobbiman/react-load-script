@@ -120,7 +120,7 @@ export default class Script extends React.Component {
         return true;
       });
     };
-    console.log('containerId :: ', containerId);
+
     if (containerId) {
       document.getElementById(containerId).appendChild(script);
     } else {
